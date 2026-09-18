@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +9,48 @@
 
 <body>
     <h2>Sign Up</h2>
-    <form>
+
+    <form id="signupForm">
         <label>Email:</label>
         <input type="text" id="email" name="email">
-        <br><br>
+
+        <div id="emailError" style="color: red;"></div>
+
+        <br>
+
         <label>Password:</label>
         <input type="password" id="password" name="password">
+
         <br><br>
+
         <button type="submit">Sign Up</button>
     </form>
+
+    <script>
+        const form = document.getElementById("signupForm");
+        const email = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+
+        form.addEventListener("submit", function (event) {
+            const emailValue = email.value.trim();
+
+            emailError.textContent = "";
+
+            if (emailValue === "") {
+                event.preventDefault();
+                emailError.textContent = "Email is required";
+                return;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(emailValue)) {
+                event.preventDefault();
+                emailError.textContent = "Please enter a valid email address";
+            }
+        });
+    </script>
 </body>
 
 </html>
+```
